@@ -12,14 +12,14 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM items`;
+    let query = `SELECT * FROM categories`;
     console.log(query);
     db.query(query)
       .then(result => {
-        const items = result.rows;
+        const categories = result.rows;
         console.log({result})
-        console.log("what we are getting", {items})
-        res.json( items );
+        console.log("what we are getting", {categories})
+        res.json({ categories });
       })
       .catch(err => {
         res
