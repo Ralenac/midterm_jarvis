@@ -15,9 +15,11 @@ module.exports = (db) => {
     let query = `SELECT * FROM items`;
     console.log(query);
     db.query(query)
-      .then(data => {
-        const items = data.rows;
-        res.json({ items });
+      .then(result => {
+        const items = result.rows;
+        console.log({result})
+        console.log("what we are getting", {items})
+        res.json( items );
       })
       .catch(err => {
         res

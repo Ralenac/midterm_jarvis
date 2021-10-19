@@ -3,7 +3,7 @@
 
 <head>
   <!-- Meta Information -->
-  <title>Tweeter - Home Page</title>
+  <title>TODO - Home Page</title>
 
   <!-- External CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -47,7 +47,7 @@
   <nav>
     <span>todo_list</span>
     <div id="nav-container">
-      <% if (user) {%>
+      <!-- <% if (user) {%>
         <form method="POST" action="/logout" class="form-inline">
         <class="nav-item">
           <span> Logges in as: <%= user.email %> </span>
@@ -60,7 +60,7 @@
             <button type="submit" class="btn btn-outline-dark">Register</button></a>
 
       </form>
-      <% } %>
+      <% } %> -->
     </div>
   </nav>
    <!-- Header includes Name and profile picture -->
@@ -93,23 +93,17 @@
       </form>
     </section>
     <section class="todo_lists" id="todo-container">
-      <div class="todo_list" id="film">
+      <div class="todo_list">
         <div class="todo_list_header">
           <label class="name_category" for="items">Movies or Series to watch</label>
-          <ul>
-            <li>LOTR</li>
-            <div class="date">start_date</div>
-            <li>Harry Potter</li>
-            <div class="date">start_date</div>
-            <li>Lion King</li>
-            <div class="date">start_date</div>
-          </ul>
         </div>
-
+        <div class="list_items">
+          checkbox
+          <div class="list_item_row">Harry Potter</div>
+          <div class="list_item_row">Car</div>
+        </div>
       </div>
-      <div></div>
-      <div></div>
-      <div></div>
+
     </section>
   </main>
 </body>
