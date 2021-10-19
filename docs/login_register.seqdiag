@@ -1,0 +1,38 @@
+Title Webapp flow: login, register
+
+participant User\n as usr
+participant Browser\n as bws
+participant client.js \n(inside Browser) as cli
+participant Server JS\n(node) as svr
+participant Database\nJS as dbjs
+participant PostgresSQL\nDB as db
+
+usr->bws: url of app\n(https://app.com/)
+bws->+svr: http GET / request to app.com
+
+alt unauthenticated user
+    svr-->-bws: login_register.html (ejs) \n since no userId
+    usr->bws: enter email, password
+    bws->svr: POST /login params{email, password}
+    svr->dbjs: getUserForEmail(email)
+    dbjs->db: SELECT * FROM users \nWHERE email={email} ;
+    alt unregistered user
+        db-->dbjs: no result
+        dbjs-->svr: no user
+        svr-->bws: redirect /register
+        usr->bws: Name, email, password
+        bws->svr: POST /register {params}
+        svr->dbjs: createNewUser({user})
+        dbjs->db: INSERT INTO users \nVALUES(name, email, password)\nRETURNING * ;
+        db-->dbjs: results
+        dbjs-->svr: {user}
+        svr-->bws: user registered, render index.html
+    else registered user
+        db-->dbjs: results
+        dbjs-->svr: results.rows[0]\ni.e. {user}
+        svr->svr: authenticate assword \nwith bcrypt()
+    end
+else authenticated user
+    svr-->bws: index.html
+end
+bws->bws: render/show index.html\ndownload all <link/> items

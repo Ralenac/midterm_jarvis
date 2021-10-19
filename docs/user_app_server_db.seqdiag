@@ -1,0 +1,27 @@
+Title Webapp flow
+
+participant User as usr
+participant Browser as bws
+participant client.js \n(inside Browser) as cli
+participant Server JS\n(node) as svr
+participant itemsRoutes JS\n(/items) as itms
+participant Database JS as dbjs
+participant PostgresSQL DB as db
+
+
+svr-->bws: index.html
+
+bws->bws: render/show index.html\ndownload all <link/> items
+bws->+*cli: call \n$(doc).ready()=>{}
+cli->cli: register event handlers\nfor form.submit()\nbutton.click() etc
+cli->cli: itemsContainer.empty()
+cli->-cli:getAllItems(\nfunc(json){})
+cli->svr: GET /items {params}
+svr->itms: GET / {params}
+itms->dbjs: getAllItems(params)
+dbjs->db: SELECT * \nFROM items\nWHERE user_id={userId}
+db-->dbjs: results
+dbjs-->itms: result.rows[{item},{item},...]
+itms-->+cli: [{item},{item},...]
+cli->cli: func(json) \n process items \n and add items <div/> \nto itemsContainer
+
