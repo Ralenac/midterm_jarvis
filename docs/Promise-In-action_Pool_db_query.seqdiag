@@ -1,0 +1,27 @@
+Title Promise-in-Action: pool db query example
+
+participant itemsRoutes JS\n(/items) as itms
+participant Database\nJS as dbjs
+participant PoolPromiseHandler\n(Inside node) as pool
+participant PostgresSQL\nDB as db
+
+itms->dbjs: getAllItems(params)
+dbjs->dbjs: prepare Query string\nand params[]
+dbjs->pool: query(queryString, params[])
+pool->pool: put queryString, params[]\n to dbQueryInvocationPool\n for querying the \nPostgresSQL DB
+pool-->dbjs: return PromiseObject
+dbjs->pool: PromiseObj.then(\nsuccessfunc(result){} object argument)
+pool->pool: put successfunc(result) Object \nin sequence of the above \nquery invocation entry
+pool-->dbjs: return updated \nPromise object
+dbjs->pool: PromiseObj.catch(\nerrorHandlerFunc(err){} object)
+pool-->dbjs: return update PromiseObject
+
+pool->pool: put errorHandlerFunc(err) \nobject in the sequence \nof above Promise
+
+pool->db: When db connection is available,\ninvoke the above noted queryString  \nSELECT * FROM items\nWHERE user_id={userId}
+db-->pool: results
+pool->dbjs: invoke above noted \nsuccessFunc(result)
+dbjs->dbjs: successFunc(result) {\nprocess results\n and extract items\n value objects}
+dbjs->itms: array of item objects \n[{item},{item},...]
+itms->itms: process items list[]\n send to caller
+
