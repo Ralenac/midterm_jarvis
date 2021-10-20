@@ -29,7 +29,7 @@ module.exports = (db) => {
 
     let  userexists = false;
 
-    console.log(' --- before render --- ',)
+    //console.log(' --- before render --- ',)
     res.render('register', { title: 'Signup Page', userexists : 'false'});
 
    });
@@ -37,18 +37,18 @@ module.exports = (db) => {
  /* GET Signup */
  router.post('/signup', function(req, res) {
    //get email from incoming request
-   console.log(' printing ------ ',req.body);
+   //console.log(' printing ------ ',req.body);
   const useremail = req.body.email;
   const name = req.body.name;
   const password = req.body.password;
   let userexists =false;
 
-  console.log( ' checkpoint ----  1 ');
+  //console.log( ' checkpoint ----  1 ');
 
   db.query(`SELECT * FROM users where email = $1;`,[useremail])
       .then(data => {
 
-        console.log( ' checkpoint ----  2 ');
+       // console.log( ' checkpoint ----  2 ');
 
         //if user already exists
         if(data.rows && data.rows.size >0){
