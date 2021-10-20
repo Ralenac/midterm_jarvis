@@ -60,14 +60,17 @@ $(() => {
 
   $.get('/api/categories')
   .then((categories) => {
-    console.log({categories});
-    let category = categories [0]
+    // console.log({categories});
+    // let category = categories [0]
+
+    for (let category of categories) {
     // console.log("test", {item})
     // let listItem = createNewListItemRow(item)
     // console.log("what function has", listItem)
     let $todoContainer = $('#todo-container')
     // console.log("container", $todoContainer)
     $todoContainer.append(createCategory(category));
+    }
   })
   .catch((err) => {
     console.log("error", err)
@@ -78,13 +81,14 @@ $(() => {
   $.get('/api/items')
     .then((items) => {
       console.log({items});
-      let item = items[0]
+      for (let item of items) {
       // console.log("test", {item})
       // let listItem = createNewListItemRow(item)
       // console.log("what function has", listItem)
       let $todoContainer = $('#todo-container')
       // console.log("container", $todoContainer)
       $todoContainer.append(createNewListItemRow(item));
+      }
     })
     .catch((err) => {
       console.log("error", err)
