@@ -4,11 +4,10 @@ nav {
   align-items: center;
   padding-left: 1.5em;
   padding-right: 1.5em;
-  color: #FFFFFF;
-  background-color: #4056A1;
+  color: navy;
+  background-color: hsl(234, 39%, 85%);
   height: 120px;
-  font-size: 32px;
-  font-family: "Bungee","sans-serif";
+  font-size: 24px;
   position: fixed;
   top: 0;
   width: 100%;
@@ -23,16 +22,20 @@ nav #nav-container {
   align-items: center;
   margin-top: 1.7rem;
   font-size: 16px;
-  font-family: "Source Sans Pro", "sans-serif";
+  font-family: 'Roboto', sans-serif;
 
 }
 
-// .fa-angle-double-down {
-//   color: red;
+.appName{
+  display: flex;
+  justify-content: row;
+  align-items: center;
+  font-family: 'Rampart One', cursive;
+}
 
-// }
+.fa-list-check {
+  padding-top: 0.2em;
+  padding-right: 0.5em;
+}
 
-// .fa-angle-double-down:hover {
-// transform: translate(0, 5px);
 
-// }

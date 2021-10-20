@@ -1,0 +1,154 @@
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-weight: 300;
+  width: 100%;
+  margin-top: 1.5em;
+}
+
+
+#todo_item-text{
+  width: 100%;
+  border: none;
+  outline: none;
+  border-bottom: 3px solid gray;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+  background-color: transparent;
+  font-size: 16px;
+  font-family: 'Roboto', sans-serif;
+  color: navy;
+}
+
+.category{
+  display: flex;
+  justify-content: start;
+  font-family: 'Rampart One', cursive;
+}
+
+
+.submit {
+  margin: 10px;
+  padding: 0.5em;
+  color: black;
+}
+
+
+.add_TODO{
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.add_TODO:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.add-movie{
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.add-movie:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.add-book {
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.add-book:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.add-restaurant {
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.add-restaurant:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.add-product {
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.add-product:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.view-all {
+  margin: 10px;
+  padding: 0.5em;
+}
+
+.view-all:hover{
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
+}
+
+.textarea-lable{
+  font-family: 'Rampart One', cursive;
+  color: rgba(163, 173, 219, 1) 34%;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+
+
