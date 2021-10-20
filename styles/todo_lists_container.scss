@@ -1,15 +1,28 @@
 .todo_lists_container{
   margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 80px;
+  margin-right: 80px;
   border: 3px solid grey;
   border-radius: 10px;
-  width: 40%;
-  display: flex;
-  flex-direction: column;
   font-family: 'Roboto', sans-serif;
+  padding: 1.5em;
+  padding-right: 7em;
+
 }
 
+.all_lists {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: flex-start;
+
+
+}
+
+
 .todo_list_header {
-  padding: 0.5em;
   font-family: 'Rampart One', cursive;
   text-decoration: underline
 }

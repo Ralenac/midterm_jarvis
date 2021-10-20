@@ -1,17 +1,15 @@
 // $(document).ready(() => {});
 
+// const createCategory = function (category) {
+//   const $listCategory = $(`
 
-
-const createCategory = function (category) {
-  const $listCategory = $(`
-
-  <div class="todo_list_header">
-    <label class="name_category" for="items">${category.name}</label>
-  </div>
-`)
-  // console.log("test", $listCategory)
-  return $listCategory;
-}
+//   <div class="todo_list_header">
+//     <label class="name_category" for="items">${category.name}</label>
+//   </div>
+// `)
+//   // console.log("test", $listCategory)
+//   return $listCategory;
+// }
 
 const createNewListItemRow = function(item) {
   console.log({item})
@@ -29,12 +27,40 @@ const createNewListItemRow = function(item) {
   return $listItem;
 }
 
-// const renderItems =  function(items) {
-//   for (const item of items) {
-//   const $item = createNewListItemRow(item);
-//   $("#todo_lists_container").prepend($item);
-// }
-// }
+const renderItems = function(items) {
+  for (const item of items) {
+    const $item = createNewListItemRow(item);
+    $('#todo-container').prepend($item);
+  }
+
+};
+
+const renderCategory = function(categories) {
+
+
+};
+
+
+
+const createList = function(category, item) {
+  const $categoryList =  ` <div class="todo_list">
+  <div class="todo_list_header">
+    <label class="name_category" for="items">${renderCategory(category)}</label>
+  </div>
+  <div class="list_items">
+    <div class="check">
+      <div class="check-mark"></div>
+    </div>
+      <div class="list_item_row">${renderItems(item)}
+      </div>
+
+  </div>
+</div>`
+
+  return $categoryList
+}
+
+
 
 // const loadItem = function() {
 
@@ -58,23 +84,23 @@ const createNewListItemRow = function(item) {
 
 $(() => {
 
-  $.get('/api/categories')
-  .then((categories) => {
-    // console.log({categories});
-    // let category = categories [0]
+  // $.get('/api/categories')
+  // .then((categories) => {
+  //   // console.log({categories});
+  //   let category = categories [0]
 
-    for (let category of categories) {
-    // console.log("test", {item})
-    // let listItem = createNewListItemRow(item)
-    // console.log("what function has", listItem)
-    let $todoContainer = $('#todo-container')
-    // console.log("container", $todoContainer)
-    $todoContainer.append(createCategory(category));
-    }
-  })
-  .catch((err) => {
-    console.log("error", err)
-  })
+  //   // for (let category of categories) {
+  //   // console.log("test", {item})
+  //   // let listItem = createNewListItemRow(item)
+  //   // console.log("what function has", listItem)
+  //   let $todoContainer = $('#todo-container')
+  //   // console.log("container", $todoContainer)
+  //   $todoContainer.append(createCategory(category));
+
+  // })
+  // .catch((err) => {
+  //   console.log("error", err)
+  // })
 
 
 
@@ -95,6 +121,7 @@ $(() => {
     })
 
 
+
 // $("#formItem").submit(function(event) {
 //   event.preventDefault();
 
@@ -109,6 +136,8 @@ $(() => {
 //       loadItem();
 //     });
 //   });
+
+
 
 });
 
