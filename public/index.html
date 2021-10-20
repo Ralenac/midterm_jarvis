@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Meta Information -->
+  <title>TODO - Home Page</title>
+
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+
+  <!--External Google-font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- App CSS -->
+  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/new-list-item.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/todo_lists_container.css" type="text/css" />
+
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- App JS -->
+  <script type="text/javascript" src="/scripts/app.js"></script>
+  <!-- <script type="text/javascript" src="/scripts/composer-char-counter.js"></script> -->
+
+  <!--timeago library-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
+</head>
+
+<body>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <div class="appName">
+      <div class="fa-solid fa-list-check"></div>
+      <div id="appName">todo_list</div>
+    </div>
+
+
+    <div id="nav-container">
+      <!-- <% if (user) {%>
+        <form method="POST" action="/logout" class="form-inline">
+        <class="nav-item">
+          <span> Logges in as: <%= user.email %> </span>
+          <button type="submit" class="btn btn-primary">Logout</button>
+        </form>
+        <% } else {%>
+          <a class="nav-item nav-link" href="/login">
+            <button type="submit" class="btn btn-outline-dark">Login</button></a>
+          <a class="nav-item nav-link" href="/register">
+            <button type="submit" class="btn btn-outline-dark">Register</button></a>
+
+      </form>
+      <% } %> -->
+    </div>
+  </nav>
+   <!-- Header includes Name and profile picture -->
+  <header class="headercontainer">
+    <div>
+      <img src="/images/profile-hex.png">
+    </div>
+    <br>
+    <div>
+      <h2>Teodora Stefanovic</h2>
+    </div>
+  </header>
+
+  <!-- Page-specific (main) content here -->
+  <main class="container">
+    <section class="new-item">
+      <form id="formItem">
+        <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
+        <textarea name="text" id="todo_item-text"></textarea>
+
+        <!-- <div class="new-todo-input">
+          <form>
+            <input type="text" placeholder="Create a new todo"></input>
+          </form>
+        </div> -->
+
+        <footer>
+          <div class="category">
+            <button class="add_TODO" >Add TODO</button>
+            <button class="add-movie"><i class="fas fa-film"></i> add movie</button>
+            <button class="add-book"><i class="fas fa-book-open"></i> add book</button>
+            <button class="add-restaurant" ><i class="fas fa-utensils"></i> add restaurant</button>
+            <button class="add-product" ><i class="fas fa-shopping-basket"></i> add product</button>
+            <button class="view-all" ><i class="fas fa-list"></i> view all</button>
+          </div>
+        </footer>
+      </form>
+    </section>
+    <section class="todo_lists_container" id="todo-container">
+      <div class="todo_list">
+        <!-- <div class="todo_list_header">
+          <label class="name_category" for="items">Movies or Series to watch</label>
+        </div> -->
+        <!-- <div class="list_items">
+          <div class="check">
+            <div class="check-mark"></div>
+          </div>
+            <div class="list_item_row">Harry Potter
+            </div>
+
+        </div> -->
+      </div>
+
+      <div class="list-2">
+
+      </div>
+
+      <div class="list-3">
+
+      </div>
+
+      <div class="list-4">
+
+      </div>
+    </section>
+  </main>
+</body>
+
+</html>
