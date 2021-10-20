@@ -11,6 +11,7 @@ const bodyParser = require("body-parser");
 const cookieSession = require('cookie-session');
 
 
+
 // PG database client/connection setup
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
@@ -47,14 +48,23 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const itemsRoutes = require("./routes/items");
 const categoriesRoutes = require("./routes/categories");
+const loginRoutes = require("./routes/login");
+
+//const logoutRoutes = require('./routes/logout');
+//var db = require('db/db');
+
 
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+//app.use("/api/widgets", widgetsRoutes(db));
 app.use("/api/items", itemsRoutes(db));
 app.use("/api/categories", categoriesRoutes(db));
+app.use("/login", loginRoutes(db))
+
+//app.use('/api/logout', logoutRoutes());
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -62,8 +72,8 @@ app.use("/api/categories", categoriesRoutes(db));
 // Separate them into separate routes files (see above).
 
 app.get("/", (req, res) => {
-  //res.render("index");
-  res.redirect('/login');
+  res.render("index");
+  //res.redirect('/login');
 });
 
 app.listen(PORT, () => {
