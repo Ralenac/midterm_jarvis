@@ -1,5 +1,7 @@
 // $(document).ready(() => {});
 
+
+
 const createCategory = function (category) {
   const $listCategory = $(`
 
@@ -7,7 +9,7 @@ const createCategory = function (category) {
     <label class="name_category" for="items">${category.name}</label>
   </div>
 `)
-  console.log("test", $listCategory)
+  // console.log("test", $listCategory)
   return $listCategory;
 }
 
@@ -23,9 +25,10 @@ const createNewListItemRow = function(item) {
 
         </div>
   `)
-  console.log("test", $listItem)
+  // console.log("test", $listItem)
   return $listItem;
 }
+
 
 
 $(() => {
@@ -61,7 +64,6 @@ $(() => {
     .catch((err) => {
       console.log("error", err)
     })
-
 
 
 
