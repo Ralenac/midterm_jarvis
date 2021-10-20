@@ -29,31 +29,31 @@ const createNewListItemRow = function(item) {
   return $listItem;
 }
 
-const renderItems =  function(items) {
-  for (const item of items) {
-  const $item = createNewListItemRow(item);
-  $("#todo_lists_container").prepend($item);
-}
-}
+// const renderItems =  function(items) {
+//   for (const item of items) {
+//   const $item = createNewListItemRow(item);
+//   $("#todo_lists_container").prepend($item);
+// }
+// }
 
-const loadItem = function() {
+// const loadItem = function() {
 
 
-  $.ajax({
-    method: "GET",
-    url: "/api/items",
-    success: (items) => {
-      console.log("data", items);
-      renderItems(items);
-    },
-    error: (err) => {
-      console.error(`there was an error: ${err}`);
-    }
-  });
+//   $.ajax({
+//     method: "GET",
+//     url: "/api/items",
+//     success: (items) => {
+//       console.log("data", items);
+//       renderItems(items);
+//     },
+//     error: (err) => {
+//       console.error(`there was an error: ${err}`);
+//     }
+//   });
 
-};
+// };
 
-loadItem();
+// loadItem();
 
 
 $(() => {
@@ -91,20 +91,20 @@ $(() => {
     })
 
 
-$("#formItem").submit(function(event) {
-  event.preventDefault();
+// $("#formItem").submit(function(event) {
+//   event.preventDefault();
 
-  const item = $("#todo_item-text").serialize();
-    $.ajax({
-      method: "POST",
-      url: "/api/items",
-      data: item
-    }).done(() => {
-      $("#todo_item-text").val("");
-      $("#todo_lists_container").empty();
-      loadItem();
-    });
-  });
+//   const item = $("#todo_item-text").serialize();
+//     $.ajax({
+//       method: "POST",
+//       url: "/api/items",
+//       data: item
+//     }).done(() => {
+//       $("#todo_item-text").val("");
+//       $("#todo_lists_container").empty();
+//       loadItem();
+//     });
+//   });
 
 });
 

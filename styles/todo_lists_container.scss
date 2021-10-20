@@ -5,11 +5,13 @@
   width: 40%;
   display: flex;
   flex-direction: column;
-  font-family: "Bungee", "sans-serif";
+  font-family: 'Roboto', sans-serif;
 }
 
 .todo_list_header {
   padding: 0.5em;
+  font-family: 'Rampart One', cursive;
+  text-decoration: underline
 }
 
 .list_items{
@@ -31,83 +33,23 @@
 }
 
 .check-mark:hover{
-  border-color: linear-gradient(135deg, #55DDFF, #C058F3 100%);
-  background-color: linear-gradient(135deg, #55DDFF, #C058F3 100%);
+  background: rgb(163, 208, 219);
+  background: linear-gradient(
+    227deg,
+    rgba(163, 208, 219, 1) 0%,
+    rgba(163, 176, 219, 1) 20%,
+    rgba(163, 173, 219, 1) 34%,
+    rgba(163, 219, 208, 1) 59%,
+    rgba(163, 208, 219, 1) 74%,
+    rgba(163, 208, 219, 1) 100%
+  );
 }
 
 .list_item_row {
-  padding: 1em;
+  padding: 0.5em;
   font-size: 16px;
-
+  font-family: 'Roboto', sans-serif;
+  color: navy;
 }
-
-
-
-// .tweet{
-//   margin-top: 1.5em;
-//   margin-bottom: 1.5em;
-//   width: 100%;
-//   border: 3px solid grey;
-//   font-family: 'Source Sans Pro', "sans-serif";
-// }
-
-// .tweet:hover{
-//   box-shadow: 5px 10px rgb(197, 197, 202);
-// }
-
-// article.tweet header{
-//   display: flex;
-//   justify-content: space-between;
-//   flex-direction: row;
-//   margin: 1.5em
-// }
-
-// article.tweet header div{
-//   display: flex;
-//   flex-direction: row;
-// }
-
-// .username {
-//   color: rgb(197, 197, 202);
-//   font-size: 24px;
-// }
-
-// .client {
-//   font-size: 24px;
-// }
-
-// .client img {
-//   margin-right: 1em;
-// }
-
-// .footer-container{
-// border-top: 3px solid grey;
-// display: flex;
-// flex-direction: row;
-// justify-content: space-between;
-// margin-left: 1.5em;
-// margin-right: 1.5em;
-// margin-bottom: 3em;
-// }
-
-// .date {
-//   margin-left: 1.5em;
-// }
-
-// .icons{
-//   margin-right: 1.5em;
-// }
-
-// article.tweet > p {
-//   margin-left: 1.5em;
-//   margin-right: 1.5em;
-//   font-size: 24px;
-//   margin-bottom: 1em;
-// }
-
-// :where(.fas.fa-flag, .fas.fa-retweet, .fas.fa-heart):hover{
-//   color: RGB(204, 170, 43);
-//   cursor: grab;
-// }
 
 
