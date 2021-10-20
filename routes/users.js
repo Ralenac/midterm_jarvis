@@ -29,7 +29,6 @@ module.exports = (db) => {
 
     let  userexists = false;
 
-    //console.log(' --- before render --- ',)
     res.render('register', { title: 'Signup Page', userexists : 'false'});
 
    });
@@ -43,12 +42,10 @@ module.exports = (db) => {
   const password = req.body.password;
   let userexists =false;
 
-  //console.log( ' checkpoint ----  1 ');
 
   db.query(`SELECT * FROM users where email = $1;`,[useremail])
       .then(data => {
 
-       // console.log( ' checkpoint ----  2 ');
 
         //if user already exists
         if(data.rows && data.rows.size >0){
@@ -61,23 +58,12 @@ module.exports = (db) => {
           const user ={name: name,email: useremail, password: password};
           user.password = bcrypt.hashSync(user.password, 12);
 
-            // database.addUser(user)
-            // .then(user => {
-            //   if (!user) {
-            //     res.send({error: "error"});
-            //     return;
-            //   }
-            //   req.session.userId = user.id;
-            //   res.render('register',{ title: 'Signup Page', registerationstatus: 'completed'})
-            // })
-            // .catch(res.render('register',{ title: 'Signup Page', registerationstatus: 'error'}));
-
-
 
           //save user details in DB
           db.query(" insert into users (name,email,password) values ($1,$2,$3)",[name,useremail,password])
            .then(
-             res.render('register',{ title: 'Signup Page', registerationstatus: 'completed', userexists: 'true'})
+             //res.render('register',{ title: 'Signup Page', registerationstatus: 'completed', userexists: 'true'})
+             res.redirect("/")
            )
            .catch(
              res.render('register',{ title: 'Signup Page', registerationstatus: 'error',
@@ -92,6 +78,8 @@ module.exports = (db) => {
           .json({ error: err.message });
       });
   });
+
+
 
   //save user details in DB
   //rediret user back to successfull registeration page
