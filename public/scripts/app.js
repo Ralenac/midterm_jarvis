@@ -30,56 +30,10 @@ const createNewListItemRow = function(item) {
 const renderItems = function(items) {
   for (const item of items) {
     const $item = createNewListItemRow(item);
-    $('#todo-container').prepend($item);
+    $('#todo-container').append($item);
   }
 
 };
-
-const renderCategory = function(categories) {
-
-
-};
-
-
-
-const createList = function(category, item) {
-  const $categoryList =  ` <div class="todo_list">
-  <div class="todo_list_header">
-    <label class="name_category" for="items">${renderCategory(category)}</label>
-  </div>
-  <div class="list_items">
-    <div class="check">
-      <div class="check-mark"></div>
-    </div>
-      <div class="list_item_row">${renderItems(item)}
-      </div>
-
-  </div>
-</div>`
-
-  return $categoryList
-}
-
-
-
-// const loadItem = function() {
-
-
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/items",
-//     success: (items) => {
-//       console.log("data", items);
-//       renderItems(items);
-//     },
-//     error: (err) => {
-//       console.error(`there was an error: ${err}`);
-//     }
-//   });
-
-// };
-
-// loadItem();
 
 
 $(() => {
@@ -107,35 +61,45 @@ $(() => {
   $.get('/api/items')
     .then((items) => {
       console.log({items});
-      for (let item of items) {
+      // for (let item of items) {
       // console.log("test", {item})
-      // let listItem = createNewListItemRow(item)
+      let listItem = createNewListItemRow(items)
       // console.log("what function has", listItem)
       let $todoContainer = $('#todo-container')
       // console.log("container", $todoContainer)
-      $todoContainer.append(createNewListItemRow(item));
-      }
+      $todoContainer.append(createNewListItemRow(listItem));
+      // }
     })
     .catch((err) => {
       console.log("error", err)
     })
 
 
+    const loadItem = function() {
+      $.get('/api/items')
+        .then((items) => {
+          renderItems(items)
+        })
 
-// $("#formItem").submit(function(event) {
-//   event.preventDefault();
+    };
 
-//   const item = $("#todo_item-text").serialize();
-//     $.ajax({
-//       method: "POST",
-//       url: "/api/items",
-//       data: item
-//     }).done(() => {
-//       $("#todo_item-text").val("");
-//       $("#todo_lists_container").empty();
-//       loadItem();
-//     });
-//   });
+    loadItem()
+
+    const $newItemForm = $("#formItem");
+    $newItemForm.on('submit', (event) => {
+      event.preventDefault();
+
+      const data = $newItemForm.serialize();
+
+      // console.log("new form", data)
+
+      $.post('/', data)
+        .then(() => {
+          loadItem()
+        })
+
+
+  });
 
 
 
