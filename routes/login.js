@@ -76,12 +76,12 @@ module.exports = (db) => {
   res.render("login", templateVars);
       })
 
-  router.post('/api/users', (req, res) => {
+  router.post('/', (req, res) => {
 
     const email = req.body.email;
     const password = req.body.password;
 
-    req.session.user_id = userID;
+    //req.session.user_id = userID;
     res.redirect("/");
 
   })
