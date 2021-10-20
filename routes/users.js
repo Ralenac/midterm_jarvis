@@ -63,7 +63,7 @@ module.exports = (db) => {
           db.query(" insert into users (name,email,password) values ($1,$2,$3)",[name,useremail,password])
            .then(
              //res.render('register',{ title: 'Signup Page', registerationstatus: 'completed', userexists: 'true'})
-             res.redirect("/")
+             res.redirect("/login")
            )
            .catch(
              res.render('register',{ title: 'Signup Page', registerationstatus: 'error',
