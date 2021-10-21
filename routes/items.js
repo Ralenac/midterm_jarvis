@@ -45,12 +45,36 @@ module.exports = (db) => {
     // const createdAt = Date.now()
     const queryParams = [1, itemBody, '2018-02-12T08:00:00.000Z', true]
 
+    let query2 = `INSERT INTO item_categories (item_id, category_id)
+    VALUES ($1, $2) RETURNING *`
+
+
+
     db.query(query, queryParams)
       .then(result => {
+
         const newItem = result.rows[0];
-        console.log({result})
         console.log("what we are getting", {newItem})
-        res.json( newItem );
+        const newItemId = newItem.id
+        const categoryId = 1;
+        const query2Params = [newItemId, categoryId]
+        console.log(query2Params)
+        //we are trying to insert into item_categories
+        db.query(query2, query2Params)
+        .then(result2 => {
+          console.log(result2)
+          const newItemCategory = result2.rows[0]
+          console.log("newItemCategory", {newItemCategory})
+          res.json ({newItem, newItemCategory})
+        })
+        .catch(err => {
+          console.log(err)
+          // res
+          //   .status(500)
+          //   .json({ error: err.message });
+        });
+
+        // res.json( newItem );
       })
       .catch(err => {
         console.log(err)
@@ -58,6 +82,8 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+
+
 
   })
 
