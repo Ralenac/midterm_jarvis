@@ -19,12 +19,12 @@ module.exports = (db) => {
     // const userId = req.session.userId;
     const userId = 1;
     const queryParams = [userId]
-    console.log(query);
+    // console.log(query);
     db.query(query, queryParams)
       .then(result => {
         const items = result.rows;
-        console.log({result})
-        console.log("what we are getting", {items})
+        // console.log({result})
+        // console.log("what we are getting", {items})
         res.json( items );
       })
       .catch(err => {
@@ -59,7 +59,7 @@ module.exports = (db) => {
         //need to change and get it from the =req.body.category_id
         const categoryId = 1;
         const query2Params = [newItemId, categoryId]
-        console.log(query2Params)
+        // console.log(query2Params)
         //we are trying to insert into item_categories
 
         if(categoryId === 0) {

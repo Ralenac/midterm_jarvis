@@ -1,5 +1,9 @@
 // $(document).ready(() => {});
 
+const getCategoryForItem = function(item) {
+
+}
+
 const createNewListItemRow = function(item) {
   console.log({item})
   const $listItem = $(`
@@ -15,17 +19,19 @@ const createNewListItemRow = function(item) {
           </button>
       </form>
     </div>
-    <div>
+    </div>`)
+
+    const $editItemForm = `<div>
       <form>
         <button id="edit_button" type="edit">
           <i class="far fa-edit"></i>
         </button>
       </form>
-    </div>
-</div>
+      </div>
+        `
 
 
-  `)
+
   // console.log("test", $listItem)
   return $listItem;
 }
@@ -111,9 +117,10 @@ $(() => {
   const $deleteButton = $('#delete_button');
 
   $deleteButton.on('click', () => {
+    console.log("hello")
     $.ajax({
       method: 'DELETE',
-      url: `/api/items/${items.id}`
+      url: `/api/items/${items.name}`
     })
       .then(() => {
         loadItem();

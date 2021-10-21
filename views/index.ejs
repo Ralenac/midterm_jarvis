@@ -1,20 +1,241 @@
 <!DOCTYPE html>
 <html lang="en">
 
+helloooooo
+
 <head>
-  <title>Home Page</title>
+  <!-- Meta Information -->
+  <title>TODO - Home Page</title>
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
+  <!-- External CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+
+  <!--External Google-font-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Source+Sans+Pro:ital,wght@0,300;0,600;1,300;1,600&display=swap"
+    rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rampart+One&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- App CSS -->
   <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/nav.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/new-list-item.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/todo_lists_container.css" type="text/css" />
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
+  <!-- External JS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+  <!-- App JS -->
   <script type="text/javascript" src="/scripts/app.js"></script>
+
+
+  <!--timeago library-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/4.0.2/timeago.min.js"
+    integrity="sha512-SVDh1zH5N9ChofSlNAK43lcNS7lWze6DTVx1JCXH1Tmno+0/1jMpdbR8YDgDUfcUrPp1xyE53G42GFrcM0CMVg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0' />
+
 </head>
 
 <body>
-  <h1>Have fun! 🥔</h1>
-</body>
+  <!-- Top nav bar (fixed) -->
+  <nav>
+    <div class="appName">
+      <div class="fa-solid fa-list-check"></div>
+      <div id="appName">todo_list</div>
+    </div>
 
+
+    <div id="nav-container">
+      <% if (user) {%>
+        <form method="POST" action="/logout" class="form-inline">
+        <class="nav-item">
+          <span> Logged in as: <%= user.email %> </span>
+          <button type="submit" id="" type="submit" class="btn btn-primary">Logout</button>
+        </form>
+        <% } else {%>
+          <a class="nav-item nav-link" href="/login">
+            <button type="submit" id="" type="submit" class="btn btn-outline-dark">Login</button></a>
+          <a class="nav-item nav-link" href="/register">
+            <button type="submit" id="" type="submit" class="btn btn-outline-dark">Sign Up</button></a>
+
+      </form>
+      <% } %>
+    </div>
+  </nav>
+   <!-- Header includes Name and profile picture -->
+   <% if (user) {%>
+  <header class="headercontainer">
+    <div>
+      <img src="/images/profile-hex.png">
+    </div>
+    <br>
+    <div>
+      <h2>Teodora Stefanovic</h2>
+    </div>
+  </header>
+
+  <!-- Page-specific (main) content here -->
+  <main class="container">
+    <section class="new-item">
+      <form id="formItem">
+        <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
+        <textarea name="todo_text" id="todo_item-text"></textarea>
+
+        <footer>
+          <div class="category">
+            <button type="submit" id="add-TODO" class="add_TODO" name="cmd" value="todo">Add TODO</button>
+
+            <button type="submit" id="add-movie-button" class="add-movie" name="cmd" value="movie"><i class="fas fa-film"></i> add movie</button>
+
+            <button type="submit" id="add-book-button" class="add-book" name="cmd" value="book"><i class="fas fa-book-open"></i> add book</button>
+
+            <button type="submit" id="add-restaurant-button" class="add-restaurant" name="cmd" value="restaurant"><i class="fas fa-utensils"></i> add restaurant</button>
+
+            <button type="submit" id="add-product-button" class="add-product" name="cmd" value="product"><i class="fas fa-shopping-basket"></i> add product</button>
+
+          </div>
+        </footer>
+      </form>
+      <button type="submit" id="view-all-button" class="view-all" name="cmd" value="all-items"><i class="fas fa-list"></i> view all</button>
+    </section>
+
+<section class="all_lists" id="all_lists">
+  <section class="first_group" id="first_group">
+    <section class="todo_lists_container" id="film-todo-container">
+      <!-- <div class="film_todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Movies or Series to watch
+        </label>
+      </div>
+        <!-- <div class="list_items">
+          <div class="check">
+            <div class="check-mark"></div>
+          </div>
+            <div class="list_item_row">Harry Potter
+            </div>
+            <div>
+              <form id="delete-item">
+                  <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                  </button>
+              </form>
+            </div>
+            <div>
+              <form>
+                <button id="edit_button" type="edit">
+                  <i class="far fa-edit"></i>
+                </button>
+              </form>
+            </div>
+        </div> -->
+
+      <!-- </div> -->
+
+    </section>
+
+    <section class="todo_lists_container" id="book-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Books to read</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+
+          <!-- </div> -->
+
+    </section>
+  </section>
+
+  <section class="second_group">
+    <section class="todo_lists_container" id="restaurants-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Restaurants where you can eat</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+        <!-- </div> -->
+    </section>
+
+
+    <section class="todo_lists_container" id="products-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Products to buy</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+        <!-- </div> -->
+    </section>
+  </section>
+</section>
+
+
+</main>
+</body>
+<% } %>
 </html>

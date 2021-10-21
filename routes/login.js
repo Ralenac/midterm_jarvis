@@ -34,7 +34,7 @@
 
 //         } else {
 //           req.session = { user_id: user.id };
-//           res.redirect('/todo');
+//           res.('/');
 
 //         }
 //       }
@@ -70,11 +70,11 @@ module.exports = (db) => {
     const userID = req.session.user_id;
 
   if (userID) {
-    return res.redirect("/");
+    return res.redirect("/api/users/me");
   }
   const templateVars = { user: null};
   res.render("login", templateVars);
-      })
+  })
 
   router.post('/', (req, res) => {
 

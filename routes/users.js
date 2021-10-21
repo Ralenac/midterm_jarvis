@@ -25,7 +25,7 @@ module.exports = (db) => {
   });
 
   /* GET Signup */
-   router.get('/signup', function(req, res) {
+   router.get('/register', function(req, res) {
 
     let  userexists = false;
 
@@ -34,13 +34,13 @@ module.exports = (db) => {
    });
 
  /* GET Signup */
- router.post('/signup', function(req, res) {
+ router.post('/register', function(req, res) {
    //get email from incoming request
    //console.log(' printing ------ ',req.body);
   const useremail = req.body.email;
   const name = req.body.name;
   const password = req.body.password;
-  let userexists =false;
+  let userexists = false;
 
 
   db.query(`SELECT * FROM users where email = $1;`,[useremail])
@@ -102,54 +102,72 @@ module.exports = (db) => {
 // });
 
 // //Check if a user exists with a given username and password
-// const login =  function(email, password) {
-//   return database.getUserWithEmail(email)
-//   .then(user => {
-//     if (bcrypt.compareSync(password, user.password)) {
-//       return user;
-//     }
-//     return null;
-//   });
-// }
-// exports.login = login;
+const login =  function(email, password) {
 
-// router.post('/login', (req, res) => {
-//   const {email, password} = req.body;
-//   login(email, password)
-//     .then(user => {
-//       if (!user) {
-//         res.send({error: "error"});
-//         return;
-//       }
-//       req.session.userId = user.id;
-//       res.send({user: {name: user.name, email: user.email, id: user.id}});
-//     })
-//     .catch(e => res.send(e));
-// });
+  let query = `SELECT * FROM users WHERE email = $1;`
+  let queryParams = [email]
 
-// router.post('/logout', (req, res) => {
-//   req.session.userId = null;
-//   res.send({});
-// });
+  console.log(query)
+  console.log(queryParams)
 
-// router.get("/me", (req, res) => {
-//   const userId = req.session.userId;
-//   if (!userId) {
-//     res.send({message: "not logged in"});
-//     return;
-//   }
+  return db.query(query, queryParams)
+  .then(result => {
+    const user = result.rows[0]
+    console.log("getting the user", {user})
+    if (bcrypt.compareSync(password, user.password)) {
+      return user;
+    }
+    return null;
+  })
+  .catch(err => {
+    console.log(err)
+  })
+}
+exports.login = login;
 
-//   database.getUserWithId(userId)
-//     .then(user => {
-//       if (!user) {
-//         res.send({error: "no user with that id"});
-//         return;
-//       }
+router.post('/login', (req, res) => {
+  const {email, password} = req.body;
+  console.log("req.body", req.body)
+  login(email, password)
+    .then(user => {
+      if (!user) {
+        res.send({error: "error"});
+        return;
+      }
+      req.session.user_id = user.id;
+      const templateVars =  {user}
+      console.log("checking templatevars for index", {templateVars})
+      res.render("index", templateVars);
+    })
+    .catch(e => res.send(e));
+});
 
-//       res.send({user: {name: user.name, email: user.email, id: userId}});
-//     })
-//     .catch(e => res.send(e));
-// });
+router.post('/logout', (req, res) => {
+  req.session.user_id = null;
+  res.send({});
+});
+
+router.get("/me", (req, res) => {
+  const userId = req.session.user_id;
+  if (!userId) {
+    res.send({message: "not logged in"});
+    return;
+  }
+
+  database.getUserWithId(userId)
+    .then(user => {
+      if (!user) {
+        res.send({error: "no user with that id"});
+        return;
+      }
+
+      const templateVars =  {user}
+      console.log("checking templatevars for index", {templateVars})
+      res.render("index", templateVars);
+    })
+    .catch(e => res.send(e));
+});
 
   return router;
 };
+
