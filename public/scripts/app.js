@@ -96,6 +96,12 @@ $(() => {
 
       // console.log("new form", data)
 
+      let category = 0
+      if($(this).attr("value")=="button-one"){
+        category = 1
+        //do button 1 thing
+    }
+
       $.ajax({
         method: "POST",
         url: "/api/items",
@@ -117,6 +123,19 @@ $(() => {
 
 
   });
+
+
+  const $booksInputButton = $('#add-book-button');
+  $booksInputButton.on('click', (event) => {
+    event.preventDefault();
+
+
+      if($(this).attr("value")=="button-one"){
+          //do button 1 thing
+      }
+      // $("#my-form").submit(); if you want to submit the form
+
+  })
 
 
 

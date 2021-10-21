@@ -56,10 +56,18 @@ module.exports = (db) => {
         const newItem = result.rows[0];
         console.log("what we are getting", {newItem})
         const newItemId = newItem.id
+        //need to change and get it from the =req.body.category_id
         const categoryId = 1;
         const query2Params = [newItemId, categoryId]
         console.log(query2Params)
         //we are trying to insert into item_categories
+
+        if(categoryId === 0) {
+          res.json (newItem)
+          return;
+        }
+
+        //we need if statement only when categoryId>0
         db.query(query2, query2Params)
         .then(result2 => {
           console.log(result2)
@@ -74,7 +82,7 @@ module.exports = (db) => {
           //   .json({ error: err.message });
         });
 
-        // res.json( newItem );
+        // res.json( newItem ); if (categoryId = 0)
       })
       .catch(err => {
         console.log(err)
