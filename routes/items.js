@@ -12,9 +12,15 @@ const router  = express.Router();
 
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    let query = `SELECT * FROM items`;
+    let query = `SELECT * FROM items
+    WHERE user_id = $1
+    `;
+
+    // const userId = req.session.userId;
+    const userId = 1;
+    const queryParams = [userId]
     console.log(query);
-    db.query(query)
+    db.query(query, queryParams)
       .then(result => {
         const items = result.rows;
         console.log({result})
@@ -26,6 +32,70 @@ module.exports = (db) => {
           .status(500)
           .json({ error: err.message });
       });
+
   });
+
+  router.post("/", (req, res) => {
+    let query = `INSERT INTO items (user_id, name, created_at, is_active)
+          VALUES ($1, $2, $3, $4) RETURNING *`;
+    let itemBody = req.body.todo_text;
+    itemBody.trim()
+    console.log({itemBody})
+    // const userId = req.session.userId;
+    // const createdAt = Date.now()
+    const queryParams = [1, itemBody, '2018-02-12T08:00:00.000Z', true]
+
+    let query2 = `INSERT INTO item_categories (item_id, category_id)
+    VALUES ($1, $2) RETURNING *`
+
+
+
+    db.query(query, queryParams)
+      .then(result => {
+
+        const newItem = result.rows[0];
+        console.log("what we are getting", {newItem})
+        const newItemId = newItem.id
+        //need to change and get it from the =req.body.category_id
+        const categoryId = 1;
+        const query2Params = [newItemId, categoryId]
+        console.log(query2Params)
+        //we are trying to insert into item_categories
+
+        if(categoryId === 0) {
+          res.json (newItem)
+          return;
+        }
+
+        //we need if statement only when categoryId>0
+        db.query(query2, query2Params)
+        .then(result2 => {
+          console.log(result2)
+          const newItemCategory = result2.rows[0]
+          console.log("newItemCategory", {newItemCategory})
+          res.json ({newItem, newItemCategory})
+        })
+        .catch(err => {
+          console.log(err)
+          // res
+          //   .status(500)
+          //   .json({ error: err.message });
+        });
+
+        // res.json( newItem ); if (categoryId = 0)
+      })
+      .catch(err => {
+        console.log(err)
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+
+
+
+  })
+
   return router;
 };
+
+

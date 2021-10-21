@@ -1,17 +1,15 @@
 // $(document).ready(() => {});
 
+// const createCategory = function (category) {
+//   const $listCategory = $(`
 
-
-const createCategory = function (category) {
-  const $listCategory = $(`
-
-  <div class="todo_list_header">
-    <label class="name_category" for="items">${category.name}</label>
-  </div>
-`)
-  // console.log("test", $listCategory)
-  return $listCategory;
-}
+//   <div class="todo_list_header">
+//     <label class="name_category" for="items">${category.name}</label>
+//   </div>
+// `)
+//   // console.log("test", $listCategory)
+//   return $listCategory;
+// }
 
 const createNewListItemRow = function(item) {
   console.log({item})
@@ -29,86 +27,117 @@ const createNewListItemRow = function(item) {
   return $listItem;
 }
 
-// const renderItems =  function(items) {
-//   for (const item of items) {
-//   const $item = createNewListItemRow(item);
-//   $("#todo_lists_container").prepend($item);
-// }
-// }
 
-// const loadItem = function() {
+const renderItems = function(items) {
+  for (const item of items) {
+    const $item = createNewListItemRow(item);
+    $('#todo-container').append($item);
+  }
 
-
-//   $.ajax({
-//     method: "GET",
-//     url: "/api/items",
-//     success: (items) => {
-//       console.log("data", items);
-//       renderItems(items);
-//     },
-//     error: (err) => {
-//       console.error(`there was an error: ${err}`);
-//     }
-//   });
-
-// };
-
-// loadItem();
+};
 
 
 $(() => {
 
-  $.get('/api/categories')
-  .then((categories) => {
-    // console.log({categories});
-    // let category = categories [0]
+  // $.get('/api/categories')
+  // .then((categories) => {
+  //   // console.log({categories});
+  //   let category = categories [0]
 
-    for (let category of categories) {
-    // console.log("test", {item})
-    // let listItem = createNewListItemRow(item)
-    // console.log("what function has", listItem)
-    let $todoContainer = $('#todo-container')
-    // console.log("container", $todoContainer)
-    $todoContainer.append(createCategory(category));
-    }
-  })
-  .catch((err) => {
-    console.log("error", err)
-  })
+  //   // for (let category of categories) {
+  //   // console.log("test", {item})
+  //   // let listItem = createNewListItemRow(item)
+  //   // console.log("what function has", listItem)
+  //   let $todoContainer = $('#todo-container')
+  //   // console.log("container", $todoContainer)
+  //   $todoContainer.append(createCategory(category));
+
+  // })
+  // .catch((err) => {
+  //   console.log("error", err)
+  // })
 
 
 
   $.get('/api/items')
     .then((items) => {
       console.log({items});
-      for (let item of items) {
+      // for (let item of items) {
       // console.log("test", {item})
-      // let listItem = createNewListItemRow(item)
+      let listItem = createNewListItemRow(items)
       // console.log("what function has", listItem)
       let $todoContainer = $('#todo-container')
       // console.log("container", $todoContainer)
-      $todoContainer.append(createNewListItemRow(item));
-      }
+      $todoContainer.append(createNewListItemRow(listItem));
+      // }
     })
     .catch((err) => {
       console.log("error", err)
     })
 
 
-// $("#formItem").submit(function(event) {
-//   event.preventDefault();
+    const loadItem = function() {
+      $.get('/api/items')
+        .then((items) => {
+          renderItems(items)
+        })
 
-//   const item = $("#todo_item-text").serialize();
-//     $.ajax({
-//       method: "POST",
-//       url: "/api/items",
-//       data: item
-//     }).done(() => {
-//       $("#todo_item-text").val("");
-//       $("#todo_lists_container").empty();
-//       loadItem();
-//     });
-//   });
+    };
+
+    loadItem()
+
+    const $newItemForm = $("#formItem");
+    $newItemForm.on('submit', (event) => {
+      event.preventDefault();
+       console.log("this is event", event)
+      const data = $newItemForm.serialize();
+
+      console.log("data", data)
+
+      // console.log("new form", data)
+
+      let category = 0
+      if($(this).attr("value")=="button-one"){
+        category = 1
+        //do button 1 thing
+    }
+
+      $.ajax({
+        method: "POST",
+        url: "/api/items",
+        data,
+      })
+      .then((data) => {
+        console.log("from server", data)
+        loadItem()
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+
+      // $.post('/api/items', data)
+      //   .then(() => {
+      //     loadItem()
+      //   })
+
+
+  });
+
+
+  const $booksInputButton = $('#add-book-button');
+  $booksInputButton.on('click', (event) => {
+    event.preventDefault();
+
+
+      if($(this).attr("value")=="button-one"){
+          //do button 1 thing
+      }
+      // $("#my-form").submit(); if you want to submit the form
+
+  })
+
+
 
 });
 
