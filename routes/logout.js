@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-module.exports = () => {
+module.exports = (db) => {
   router.post('/logout', (req, res) => {
     // clear session cookie
     req.session = null;
