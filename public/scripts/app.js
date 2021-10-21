@@ -27,6 +27,7 @@ const createNewListItemRow = function(item) {
   return $listItem;
 }
 
+
 const renderItems = function(items) {
   for (const item of items) {
     const $item = createNewListItemRow(item);
@@ -88,15 +89,31 @@ $(() => {
     const $newItemForm = $("#formItem");
     $newItemForm.on('submit', (event) => {
       event.preventDefault();
-
+       console.log("this is event", event)
       const data = $newItemForm.serialize();
+
+      console.log("data", data)
 
       // console.log("new form", data)
 
-      $.post('/', data)
-        .then(() => {
-          loadItem()
-        })
+      $.ajax({
+        method: "POST",
+        url: "/api/items",
+        data,
+      })
+      .then((data) => {
+        console.log("from server", data)
+        loadItem()
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+
+
+      // $.post('/api/items', data)
+      //   .then(() => {
+      //     loadItem()
+      //   })
 
 
   });
