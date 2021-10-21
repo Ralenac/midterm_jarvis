@@ -59,13 +59,13 @@
         <form method="POST" action="/logout" class="form-inline">
         <class="nav-item">
           <span> Logges in as: <%= user.email %> </span>
-          <button type="submit" class="btn btn-primary">Logout</button>
+          <button type="submit" id="" type="submit" class="btn btn-primary">Logout</button>
         </form>
         <% } else {%>
           <a class="nav-item nav-link" href="/login">
-            <button type="submit" class="btn btn-outline-dark">Login</button></a>
+            <button type="submit" id="" type="submit" class="btn btn-outline-dark">Login</button></a>
           <a class="nav-item nav-link" href="/register">
-            <button type="submit" class="btn btn-outline-dark">Register</button></a>
+            <button type="submit" id="" type="submit" class="btn btn-outline-dark">Register</button></a>
 
       </form>
       <% } %> -->
@@ -91,97 +91,148 @@
 
         <footer>
           <div class="category">
-            <button class="add_TODO" >Add TODO</button>
-            <button class="add-book" id="add-book-button"><i class="fas fa-book-open"></i> add book</button>
-            <!-- <button class="add-movie"><i class="fas fa-film"></i> add movie</button>
-            <button class="add-restaurant" ><i class="fas fa-utensils"></i> add restaurant</button>
-            <button class="add-product" ><i class="fas fa-shopping-basket"></i> add product</button> -->
+            <button type="submit" id="add-TODO" class="add_TODO" name="cmd" value="todo">Add TODO</button>
+
+            <button type="submit" id="add-movie-button" class="add-movie" name="cmd" value="movie"><i class="fas fa-film"></i> add movie</button>
+
+            <button type="submit" id="add-book-button" class="add-book" name="cmd" value="book"><i class="fas fa-book-open"></i> add book</button>
+
+            <button type="submit" id="add-restaurant-button" class="add-restaurant" name="cmd" value="restaurant"><i class="fas fa-utensils"></i> add restaurant</button>
+
+            <button type="submit" id="add-product-button" class="add-product" name="cmd" value="product"><i class="fas fa-shopping-basket"></i> add product</button>
 
           </div>
         </footer>
       </form>
-      <button class="view-all" ><i class="fas fa-list"></i> view all</button>
+      <button type="submit" id="view-all-button" class="view-all" name="cmd" value="all-items"><i class="fas fa-list"></i> view all</button>
     </section>
 
 <section class="all_lists" id="all_lists">
   <section class="first_group" id="first_group">
     <section class="todo_lists_container" id="film-todo-container">
       <!-- <div class="film_todo_list"> -->
-        <div class="todo_list_header">
-          <label class="name_category" for="items">Movies or Series to watch</label>
-        </div>
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Movies or Series to watch
+        </label>
+      </div>
         <!-- <div class="list_items">
           <div class="check">
             <div class="check-mark"></div>
           </div>
             <div class="list_item_row">Harry Potter
-            </div> -->
+            </div>
+            <div>
+              <form id="delete-item">
+                  <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                  </button>
+              </form>
+            </div>
+            <div>
+              <form>
+                <button id="edit_button" type="edit">
+                  <i class="far fa-edit"></i>
+                </button>
+              </form>
+            </div>
+        </div> -->
 
       <!-- </div> -->
 
+    </section>
 
+    <section class="todo_lists_container" id="book-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Books to read</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
 
+          <!-- </div> -->
+
+    </section>
+  </section>
+
+  <section class="second_group">
+    <section class="todo_lists_container" id="restaurants-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Restaurants where you can eat</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+        <!-- </div> -->
     </section>
 
 
-  <section class="todo_lists_container" id="todo-container">
-
-  <div class="todo_list">
-    <div class="todo_list_header">
-    <label class="name_category" for="items">Books to read</label>
-    </div>
-    <!-- <div class="list_items">
-    <div class="check">
-      <div class="check-mark"></div>
-    </div>
-      <div class="list_item_row">Harry Potter
+    <section class="todo_lists_container" id="products-todo-container">
+      <!-- <div class="todo_list"> -->
+      <div class="todo_list_header">
+        <label class="name_category" for="items">Products to buy</label>
+      </div>
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
       </div> -->
-
-  </div>
-
-</section>
-</section>
-
-<section class="second_group">
-<section class="todo_lists_container" id="todo-container">
-
-<div class="todo_list">
-<div class="todo_list_header">
-  <label class="name_category" for="items">Restaurants where you can eat</label>
-</div>
-<!-- <div class="list_items">
-  <div class="check">
-    <div class="check-mark"></div>
-  </div>
-    <div class="list_item_row">Harry Potter
-    </div>
-
-</div> -->
-</div>
+        <!-- </div> -->
+    </section>
+  </section>
 </section>
 
 
-<section class="todo_lists_container" id="todo-container">
-
-<div class="todo_list">
-<div class="todo_list_header">
-  <label class="name_category" for="items">Products to buy</label>
-</div>
-<!-- <div class="list_items">
-  <div class="check">
-    <div class="check-mark"></div>
-  </div>
-    <div class="list_item_row">Harry Potter
-    </div>
-
-</div> -->
-</div>
-</section>
-</section>
-</section>
-
-
-  </main>
+</main>
 </body>
 
 </html>

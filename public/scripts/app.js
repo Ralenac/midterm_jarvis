@@ -1,27 +1,30 @@
 // $(document).ready(() => {});
 
-// const createCategory = function (category) {
-//   const $listCategory = $(`
-
-//   <div class="todo_list_header">
-//     <label class="name_category" for="items">${category.name}</label>
-//   </div>
-// `)
-//   // console.log("test", $listCategory)
-//   return $listCategory;
-// }
-
 const createNewListItemRow = function(item) {
   console.log({item})
   const $listItem = $(`
   <div class="list_items">
-          <div class="check">
-            <div class="check-mark"></div>
-          </div>
-            <div class="list_item_row">${item.name}
-            </div>
+  <div class="check">
+    <div class="check-mark"></div>
+  </div>
+    <div class="list_item_row">${item.name}
+    </div>
+    <div>
+      <form id="delete-item">
+          <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+          </button>
+      </form>
+    </div>
+    <div>
+      <form>
+        <button id="edit_button" type="edit">
+          <i class="far fa-edit"></i>
+        </button>
+      </form>
+    </div>
+</div>
 
-        </div>
+
   `)
   // console.log("test", $listItem)
   return $listItem;
@@ -29,35 +32,19 @@ const createNewListItemRow = function(item) {
 
 
 const renderItems = function(items) {
-  for (const item of items) {
-    const $item = createNewListItemRow(item);
-    $('#todo-container').append($item);
-  }
+
+  const $itemContainer = $('#film-todo-container');
+  $itemContainer.empty();
+    for (const item of items) {
+      const $item = createNewListItemRow(item);
+      $itemContainer.append($item);
+    }
+
 
 };
 
 
 $(() => {
-
-  // $.get('/api/categories')
-  // .then((categories) => {
-  //   // console.log({categories});
-  //   let category = categories [0]
-
-  //   // for (let category of categories) {
-  //   // console.log("test", {item})
-  //   // let listItem = createNewListItemRow(item)
-  //   // console.log("what function has", listItem)
-  //   let $todoContainer = $('#todo-container')
-  //   // console.log("container", $todoContainer)
-  //   $todoContainer.append(createCategory(category));
-
-  // })
-  // .catch((err) => {
-  //   console.log("error", err)
-  // })
-
-
 
   $.get('/api/items')
     .then((items) => {
@@ -86,21 +73,21 @@ $(() => {
 
     loadItem()
 
+
+
     const $newItemForm = $("#formItem");
     $newItemForm.on('submit', (event) => {
       event.preventDefault();
-       console.log("this is event", event)
+      //  console.log("this is event", event)
+
       const data = $newItemForm.serialize();
 
-      console.log("data", data)
 
-      // console.log("new form", data)
-
-      let category = 0
-      if($(this).attr("value")=="button-one"){
-        category = 1
-        //do button 1 thing
-    }
+      if ($(this).attr("value")==="movie") {
+      } else if ($(this).attr("value")==="book") {
+      } else if ($(this).attr("value")==="restaurant") {
+      } else if ($(this).attr("value")==="product") {
+      }
 
       $.ajax({
         method: "POST",
@@ -116,27 +103,22 @@ $(() => {
       })
 
 
-      // $.post('/api/items', data)
-      //   .then(() => {
-      //     loadItem()
-      //   })
 
 
   });
 
 
-  const $booksInputButton = $('#add-book-button');
-  $booksInputButton.on('click', (event) => {
-    event.preventDefault();
+  const $deleteButton = $('#delete_button');
 
-
-      if($(this).attr("value")=="button-one"){
-          //do button 1 thing
-      }
-      // $("#my-form").submit(); if you want to submit the form
-
-  })
-
+  $deleteButton.on('click', () => {
+    $.ajax({
+      method: 'DELETE',
+      url: `/api/items/${items.id}`
+    })
+      .then(() => {
+        loadItem();
+      });
+  });
 
 
 });
