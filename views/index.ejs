@@ -50,7 +50,7 @@
   <nav>
     <div class="appName">
       <div class="fa-solid fa-list-check"></div>
-      <div id="appName">todo_list</div>
+      <div id="appName">JARVIS todo list</div>
     </div>
 
 
@@ -92,13 +92,14 @@
           <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
             <input type="text"  id="todo_item-text" class="form-control" name="todo_text">
         </div>
-        <button  type="submit" class="btn btn-primary btn-lg" formmethod="post" formaction="/api/items/othercategory">Add other</button>
-        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-film" formmethod="post" formaction="/api/items/towatchcategory" value="movie">Add to watch</button>
-        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-book-open" formmethod="post" formaction="/api/items/toreadcategory" value="book">Add to read</button>
-        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-utensils" formmethod="post" formaction="/api/items/toeatcategory" value="restaurant">Add to eat</button>
-        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-shopping-basket" formmethod="post" formaction="/api/items/tobuycategory" value="product">Add to buy</button>
+        <footer>
+        <button  type="submit" class="btn btn-primary btn-lg" formmethod="post" formaction="/api/items/othercategory" value="other">Add other TODO</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-film" formmethod="post" formaction="/api/items/towatchcategory" value="movie"><i class="fas fa-film"></i> Add to watch</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-book-open" formmethod="post" formaction="/api/items/toreadcategory" value="book"><i class="fas fa-book-open"></i> Add to read</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-utensils" formmethod="post" formaction="/api/items/toeatcategory" value="restaurant"><i class="fas fa-utensils"></i> Add to eat</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-shopping-basket" formmethod="post" formaction="/api/items/tobuycategory" value="product"><i class="fas fa-shopping-basket"></i> Add to buy</button>
+      </footer>
     </form>
-
 
       <!-- <form id="formItem">
         <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
@@ -120,14 +121,14 @@
         </footer>
       </form> -->
 
-      <button type="submit" id="view-all-button" class="view-all" name="cmd" value="all-items"><i class="fas fa-list"></i> view all</button>
+      <!-- <button type="submit" id="view-all-button" class="view-all" name="cmd" value="all-items"><i class="fas fa-list"></i> view all</button> -->
     </section>
 
-<section class="all_lists" id="all_lists">
+<div class="all_lists" id="all_lists">
   <section class="first_group" id="first_group">
     <section class="list-block">
     <div class="todo_list_header">
-      <label class="name_category" for="items">Movies or Series to watch
+      <label class="name_category" for="items"><i class="fas fa-film"></i> Movies or Series to watch
       </label>
     </div>
 
@@ -162,7 +163,7 @@
 
   <section class="list-block">
   <div class="todo_list_header">
-    <label class="name_category" for="items">Books to read</label>
+    <label class="name_category" for="items"><i class="fas fa-book-open"></i> Books to read</label>
   </div>
     <section class="todo_lists_container" id="book-todo-container">
       <!-- <div class="todo_list"> -->
@@ -197,7 +198,7 @@
   <section class="second_group">
     <section class="list-block">
     <div class="todo_list_header">
-      <label class="name_category" for="items">Restaurants where you can eat</label>
+      <label class="name_category" for="items"><i class="fas fa-utensils"></i> Restaurants where you can eat</label>
     </div>
 
     <section class="todo_lists_container" id="restaurants-todo-container">
@@ -227,23 +228,24 @@
     </section>
   </section>
 
-  <section class="list-block"></section>
-  <div class="todo_list_header">
-    <label class="name_category" for="items">Products to buy</label>
-  </div>
+  <section class="list-block">
+
+    <div class="todo_list_header">
+      <label class="name_category" for="items"><i class="fas fa-shopping-basket"></i> Products to buy</label>
+    </div>
     <section class="todo_lists_container" id="products-todo-container">
       <!-- <div class="todo_list"> -->
 
-      <!-- <div class="list_items">
-        <div class="check">
-          <div class="check-mark"></div>
-        </div>
+        <!-- <div class="list_items">
+          <div class="check">
+            <div class="check-mark"></div>
+          </div>
           <div class="list_item_row">Harry Potter
           </div>
           <div>
             <form id="delete-item">
-                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
-                </button>
+              <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+              </button>
             </form>
           </div>
           <div>
@@ -253,9 +255,11 @@
               </button>
             </form>
           </div>
-      </div> -->
+        </div> -->
         <!-- </div> -->
+      </section>
     </section>
+  <!-- </section> -->
 
 
   <section class="list-block">
@@ -289,7 +293,7 @@
     </section>
   </section>
 </section>
-</section>
+</div>
 
 
 </main>

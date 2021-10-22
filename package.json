@@ -23,6 +23,7 @@
     "pg": "^8.5.0",
     "pg-native": "^3.0.0",
     "sass": "^1.35.1",
+    "serve-favicon": "^2.5.0",
     "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
   },
   "devDependencies": {

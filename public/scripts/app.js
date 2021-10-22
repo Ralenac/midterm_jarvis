@@ -106,14 +106,10 @@ $(() => {
     const $newItemForm = $("#formItem");
     $newItemForm.on('submit', function(event) {
       event.preventDefault();
-       console.log("this is event", event)
+      console.log("this is event", event)
 
       const data = $newItemForm.serialize();
-
-
-
       const buttonvalue = event.originalEvent.submitter.attributes[4].value
-
       console.log({buttonvalue})
 
       let categoryId = 0;
@@ -137,7 +133,8 @@ $(() => {
         categoryId = 0;
       }
 
-
+      const $todoItemTextInput = $('#todo_item-text');
+      $todoItemTextInput.val('')
 
       $.ajax({
         method: "POST",
@@ -146,14 +143,11 @@ $(() => {
       })
       .then((data) => {
         console.log("from server", data)
-        loadItem(categoryId)
+        categoryId ? loadItem(categoryId) : loadItemAll();
       })
       .catch((error) => {
         console.log(error);
       })
-
-
-
 
     });
 

@@ -1,8 +1,21 @@
-.todo_lists_container{
+// .todo_lists_container{
+//   margin-top: 20px;
+//   margin-bottom: 20px;
+//   margin-left: 80px;
+//   margin-right: 80px;
+//   border: 3px solid grey;
+//   border-radius: 10px;
+//   font-family: 'Roboto', sans-serif;
+//   padding: 1.5em;
+//   padding-right: 7em;
+
+// }
+
+.list-block {
   margin-top: 20px;
   margin-bottom: 20px;
-  margin-left: 80px;
-  margin-right: 80px;
+  margin-left: 20px;
+  margin-right: 20px;
   border: 3px solid grey;
   border-radius: 10px;
   font-family: 'Roboto', sans-serif;
@@ -23,7 +36,8 @@
 
 .todo_list_header {
   font-family: 'Rampart One', cursive;
-  text-decoration: underline
+  text-decoration: underline;
+  font-size: 1.2em;
 }
 
 

@@ -13,14 +13,29 @@ const categoryKeys = [
   // 2: 'Books to read',
   ["Book", "Magazine", "Periodical", "Newspaper", "Blog", "Comics", "Book", "Story book", "Novel", "Autobiography", "Paperback", "Hardcover"],
   // 3: 'Restaurants where you can eat',
-  ["Restaurant", "Cafe", "Eatery", "Canteen", "Bakery", "Food Stall"],
+  ["Restaurant", "Cafe", "Eatery", "Canteen", "Bakery", "Food Stall", "ExpandedFood"],
   // 4: 'Products to buy'
   ["Product", "Shopping item", "Vegetable", "Grocery item", "Produce", "Eatable", "Gadget", "Apperal", "Clothes", "Consumable", "Device"]
 ];
 
-
 const datatypes = 'datatypes';
 const plaintext = 'plaintext';
+
+/**
+ * determineCategory: Determine the category of the
+ * given string from:
+ * {
+ *    Other:                  0,
+ *    Film_series_to watch:   1,
+ *    Books_to_read:          2,
+ *    Restaurants_to_eat_at:  3,
+ *    Products_to_buy:        4
+ * }
+ * @param {String} searchString : String to determine the category of
+ * @param {function(error, Number)} resultCallback : callback function to handle the result
+ *
+ * @return {Number} categoryId : Category Id number of the given search string
+ */
 const determineCategory = function(searchString, resultCallback) {
   waApi.getFull({
     input: searchString,
@@ -28,10 +43,12 @@ const determineCategory = function(searchString, resultCallback) {
     format: plaintext,
   })
     .then((result) => {
+      console.log({result});
       const resultTypes = result[datatypes];
       console.log({ resultTypes });
       if (!resultTypes) {
         resultCallback("Category Not Found!");
+        return;
       }
       let categoryId = 0;
       for (keyArr of categoryKeys) {
@@ -46,9 +63,10 @@ const determineCategory = function(searchString, resultCallback) {
       }
       // Category not found
       resultCallback("Category Not Found!");
+      return;
     })
-    .catch((error) => { resultCallback(error) });
+    .catch((error) => { console.log(error) });
 
 };
 
-module.exports = { determineCategory };
+module.exports = { determineCategory: determineCategory };
