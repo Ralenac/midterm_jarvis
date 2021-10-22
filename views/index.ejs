@@ -86,11 +86,25 @@
   <!-- Page-specific (main) content here -->
   <main class="container">
     <section class="new-item">
-      <form id="formItem">
-        <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
-        <textarea name="todo_text" id="todo_item-text"></textarea>
 
-        <footer>
+      <form id="formItem">
+        <div class="form-group" >
+          <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
+            <input type="text"  id="todo_item-text" class="form-control" name="todo_text">
+        </div>
+        <button  type="submit" class="btn btn-primary btn-lg" formmethod="post" formaction="/api/items/othercategory">Add other</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-film" formmethod="post" formaction="/api/items/towatchcategory" value="movie">Add to watch</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-book-open" formmethod="post" formaction="/api/items/toreadcategory" value="book">Add to read</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-utensils" formmethod="post" formaction="/api/items/toeatcategory" value="restaurant">Add to eat</button>
+        <button type="submit" class="btn btn-primary btn-lg" class="fas fa-shopping-basket" formmethod="post" formaction="/api/items/tobuycategory" value="product">Add to buy</button>
+    </form>
+
+
+      <!-- <form id="formItem">
+        <label class="textarea-lable" for="todo-text">What do you want TODO next?</label>
+        <textarea name="todo_text" id="todo_item-text"></textarea> -->
+
+        <!-- <footer>
           <div class="category">
             <button type="submit" id="add-TODO" class="add_TODO" name="cmd" value="todo">Add TODO</button>
 
@@ -100,22 +114,26 @@
 
             <button type="submit" id="add-restaurant-button" class="add-restaurant" name="cmd" value="restaurant"><i class="fas fa-utensils"></i> add restaurant</button>
 
-            <button type="submit" id="add-product-button" class="add-product" name="cmd" value="product"><i class="fas fa-shopping-basket"></i> add product</button>
+            <button type="submit" id="add-product-button" class="add-product" name="cmd" value="product"><i class="fas fa-shopping-basket"></i> add product</button> -->
 
-          </div>
+          <!-- </div>
         </footer>
-      </form>
+      </form> -->
+
       <button type="submit" id="view-all-button" class="view-all" name="cmd" value="all-items"><i class="fas fa-list"></i> view all</button>
     </section>
 
 <section class="all_lists" id="all_lists">
   <section class="first_group" id="first_group">
+    <section class="list-block">
+    <div class="todo_list_header">
+      <label class="name_category" for="items">Movies or Series to watch
+      </label>
+    </div>
+
     <section class="todo_lists_container" id="film-todo-container">
       <!-- <div class="film_todo_list"> -->
-      <div class="todo_list_header">
-        <label class="name_category" for="items">Movies or Series to watch
-        </label>
-      </div>
+
         <!-- <div class="list_items">
           <div class="check">
             <div class="check-mark"></div>
@@ -140,12 +158,15 @@
       <!-- </div> -->
 
     </section>
+  </section>
 
+  <section class="list-block">
+  <div class="todo_list_header">
+    <label class="name_category" for="items">Books to read</label>
+  </div>
     <section class="todo_lists_container" id="book-todo-container">
       <!-- <div class="todo_list"> -->
-      <div class="todo_list_header">
-        <label class="name_category" for="items">Books to read</label>
-      </div>
+
       <!-- <div class="list_items">
         <div class="check">
           <div class="check-mark"></div>
@@ -171,42 +192,17 @@
 
     </section>
   </section>
+</section>
 
   <section class="second_group">
+    <section class="list-block">
+    <div class="todo_list_header">
+      <label class="name_category" for="items">Restaurants where you can eat</label>
+    </div>
+
     <section class="todo_lists_container" id="restaurants-todo-container">
       <!-- <div class="todo_list"> -->
-      <div class="todo_list_header">
-        <label class="name_category" for="items">Restaurants where you can eat</label>
-      </div>
-      <!-- <div class="list_items">
-        <div class="check">
-          <div class="check-mark"></div>
-        </div>
-          <div class="list_item_row">Harry Potter
-          </div>
-          <div>
-            <form id="delete-item">
-                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
-                </button>
-            </form>
-          </div>
-          <div>
-            <form>
-              <button id="edit_button" type="edit">
-                <i class="far fa-edit"></i>
-              </button>
-            </form>
-          </div>
-      </div> -->
-        <!-- </div> -->
-    </section>
 
-
-    <section class="todo_lists_container" id="products-todo-container">
-      <!-- <div class="todo_list"> -->
-      <div class="todo_list_header">
-        <label class="name_category" for="items">Products to buy</label>
-      </div>
       <!-- <div class="list_items">
         <div class="check">
           <div class="check-mark"></div>
@@ -230,6 +226,69 @@
         <!-- </div> -->
     </section>
   </section>
+
+  <section class="list-block"></section>
+  <div class="todo_list_header">
+    <label class="name_category" for="items">Products to buy</label>
+  </div>
+    <section class="todo_lists_container" id="products-todo-container">
+      <!-- <div class="todo_list"> -->
+
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+        <!-- </div> -->
+    </section>
+
+
+  <section class="list-block">
+  <div class="todo_list_header">
+    <label class="name_category" for="items"> Other todo items</label>
+  </div>
+    <section class="todo_lists_container" id="other-todo-container">
+      <!-- <div class="todo_list"> -->
+
+      <!-- <div class="list_items">
+        <div class="check">
+          <div class="check-mark"></div>
+        </div>
+          <div class="list_item_row">Harry Potter
+          </div>
+          <div>
+            <form id="delete-item">
+                <button id="delete_button" type="delete"><i class="fas fa-trash"></i>
+                </button>
+            </form>
+          </div>
+          <div>
+            <form>
+              <button id="edit_button" type="edit">
+                <i class="far fa-edit"></i>
+              </button>
+            </form>
+          </div>
+      </div> -->
+        <!-- </div> -->
+    </section>
+  </section>
+</section>
 </section>
 
 

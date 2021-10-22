@@ -32,73 +32,121 @@ const createNewListItemRow = function(item) {
 
 
 
+const renderItems = function(items, categoryId) {
 
-const renderItems = function(items) {
-
-  const $itemContainer = $('#film-todo-container');
+  let $itemContainer = $('#other-todo-container');
+  if (categoryId === 1) {
+    $itemContainer = $('#film-todo-container')
+  }
+  else if (categoryId === 2) {
+    $itemContainer = $('#book-todo-container')
+  }
+  else if (categoryId === 3) {
+    $itemContainer = $('#restaurants-todo-container')
+  }
+  else if (categoryId === 4) {
+    $itemContainer = $('#products-todo-container')
+  } else {
+    $itemContainer = $('#other-todo-container');
+  }
   $itemContainer.empty();
     for (const item of items) {
       const $item = createNewListItemRow(item);
       $itemContainer.append($item);
     }
 
+};
+
+
+
+const loadItem = function(categoryId) {
+
+  console.log(" making  get category id in loaditem function", categoryId)
+  $.get('/api/items', {category_id: categoryId},
+
+    function(items) {
+      console.log("result for items for get category id in loaditem function", items)
+      renderItems(items, categoryId)
+    })
 
 };
+
+const loadItemAll = function() {
+
+  loadItem(1)
+  loadItem(2)
+  loadItem(3)
+  loadItem(4)
+  loadItem(0)
+
+}
 
 
 $(() => {
 
-  $.get('/api/items')
-    .then((items) => {
-      console.log({items});
-      // for (let item of items) {
-      // console.log("test", {item})
-      let listItem = createNewListItemRow(items)
-      // console.log("what function has", listItem)
-      let $todoContainer = $('#todo-container')
-      // console.log("container", $todoContainer)
-      $todoContainer.append(createNewListItemRow(listItem));
-      // }
-    })
-    .catch((err) => {
-      console.log("error", err)
-    })
+  loadItemAll()
 
-
-    const loadItem = function() {
-      $.get('/api/items')
-        .then((items) => {
-          renderItems(items)
-        })
-
-    };
-
-    loadItem()
-
+  // $.get('/api/items')
+  //   .then((items) => {
+  //     console.log({items});
+  //     // for (let item of items) {
+  //     // console.log("test", {item})
+  //     let listItem = createNewListItemRow(items)
+  //     // console.log("what function has", listItem)
+  //     let $todoContainer = $('#todo-container')
+  //     // console.log("container", $todoContainer)
+  //     $todoContainer.append(createNewListItemRow(listItem));
+  //     // }
+  //   })
+  //   .catch((err) => {
+  //     console.log("error", err)
+  //   })
 
 
     const $newItemForm = $("#formItem");
-    $newItemForm.on('submit', (event) => {
+    $newItemForm.on('submit', function(event) {
       event.preventDefault();
-      //  console.log("this is event", event)
+       console.log("this is event", event)
 
       const data = $newItemForm.serialize();
 
 
-      if ($(this).attr("value")==="movie") {
-      } else if ($(this).attr("value")==="book") {
-      } else if ($(this).attr("value")==="restaurant") {
-      } else if ($(this).attr("value")==="product") {
+
+      const buttonvalue = event.originalEvent.submitter.attributes[4].value
+
+      console.log({buttonvalue})
+
+      let categoryId = 0;
+      let url = "/api/items"
+
+      if (buttonvalue==="movie") {
+        url += "/towatchcategory"
+        categoryId = 1;
+      } else if (buttonvalue==="book") {
+        url += "/toreadcategory"
+        categoryId = 2;
+      // } else if ($(this).attr("value")==="restaurant") {
+      } else if (buttonvalue ==="restaurant") {
+        url += "/toeatcategory"
+        categoryId = 3;
+      } else if (buttonvalue==="product") {
+        url += "/tobuycategory"
+        categoryId = 4;
+      } else {
+        url += "/othercategory"
+        categoryId = 0;
       }
+
+
 
       $.ajax({
         method: "POST",
-        url: "/api/items",
+        url: url,
         data,
       })
       .then((data) => {
         console.log("from server", data)
-        loadItem()
+        loadItem(categoryId)
       })
       .catch((error) => {
         console.log(error);
@@ -107,21 +155,21 @@ $(() => {
 
 
 
-  });
+    });
 
 
-  const $deleteButton = $('#delete_button');
+  // const $deleteButton = $('#delete_button');
 
-  $deleteButton.on('click', () => {
-    console.log("hello")
-    $.ajax({
-      method: 'DELETE',
-      url: `/api/items/${items.name}`
-    })
-      .then(() => {
-        loadItem();
-      });
-  });
+  // $deleteButton.on('click', () => {
+  //   console.log("hello")
+  //   $.ajax({
+  //     method: 'DELETE',
+  //     url: `/api/items/${items.name}`
+  //   })
+  //     .then(() => {
+  //       loadItem();
+  //     });
+  // });
 
 
 });
