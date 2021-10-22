@@ -41,6 +41,9 @@ module.exports = (db) => {
   const name = req.body.name;
   const password = req.body.password;
   let userexists = false;
+  const body = req.body
+
+  console.log("post register req.body", {body})
 
 
   db.query(`SELECT * FROM users where email = $1;`,[useremail])
@@ -48,27 +51,34 @@ module.exports = (db) => {
 
 
         //if user already exists
-        if(data.rows && data.rows.size >0){
-            res.render('register',{ title: 'Signup Page', userexists: 'true'})
+        if(data.rows && data.rows.size > 0){
+            res.render('login',{ title: 'Sign in', userexists: 'true'})
         }
         else{
 
-          //user.password = bcrypt.hashSync(user.password, 12);
+          const hashedPassword = bcrypt.hashSync(password, 12);
 
-          const user ={name: name,email: useremail, password: password};
-          user.password = bcrypt.hashSync(user.password, 12);
+          // const user = {name: name, email: useremail, password: hashedPassword};
+          // user.password = bcrypt.hashSync(user.password, 12);
+
+          console.log({hashedPassword})
 
 
           //save user details in DB
-          db.query(" insert into users (name,email,password) values ($1,$2,$3)",[name,useremail,password])
-           .then(
-             //res.render('register',{ title: 'Signup Page', registerationstatus: 'completed', userexists: 'true'})
-             res.redirect("/login")
-           )
-           .catch(
-             res.render('register',{ title: 'Signup Page', registerationstatus: 'error',
+          db.query(" INSERT INTO users (name,email,password) VALUES ($1,$2,$3) RETURNING * ",[name, useremail, hashedPassword])
+           .then(result => {
+
+            console.log("result from insert new user register post", {result})
+             const user = result.rows[0];
+
+             res.render("index", {user})
+           })
+           .catch(err => {
+             console.log(err)
+
+             res.render('register', { title: 'Signup Page', registerationstatus: 'error',
              userexists: 'false'})
-           )
+           })
         }
       })
       .catch(err => {
