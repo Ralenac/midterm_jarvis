@@ -41,9 +41,9 @@ module.exports = (db) => {
     let itemBody = req.body.todo_text;
     itemBody.trim()
     console.log({itemBody})
-    // const userId = req.session.userId;
-    // const createdAt = Date.now()
-    const queryParams = [1, itemBody, '2018-02-12T08:00:00.000Z', true]
+    const userId = req.session.user_id;
+    const createdAt = new Date()
+    const queryParams = [userId, itemBody, createdAt, true]
 
     let query2 = `INSERT INTO item_categories (item_id, category_id)
     VALUES ($1, $2) RETURNING *`

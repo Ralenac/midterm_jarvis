@@ -1,8 +1,3 @@
-// $(document).ready(() => {});
-
-const getCategoryForItem = function(item) {
-
-}
 
 const createNewListItemRow = function(item) {
   console.log({item})
@@ -19,22 +14,23 @@ const createNewListItemRow = function(item) {
           </button>
       </form>
     </div>
-    </div>`)
 
-    const $editItemForm = `<div>
+    <div>
       <form>
         <button id="edit_button" type="edit">
           <i class="far fa-edit"></i>
         </button>
       </form>
       </div>
-        `
-
+      </div>
+        `)
 
 
   // console.log("test", $listItem)
   return $listItem;
 }
+
+
 
 
 const renderItems = function(items) {
